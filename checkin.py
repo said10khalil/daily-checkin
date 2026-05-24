@@ -7,12 +7,19 @@ with sync_playwright() as p:
     page.goto("https://hr.jitex.be/admin/")
     page.wait_for_load_state("networkidle")
     
-    # جرب بطرق مختلفة
     page.locator("input[type='text']").first.fill(os.environ["EMAIL"])
     page.locator("input[type='password']").first.fill(os.environ["PASSWORD"])
     page.locator("button[type='submit']").click()
     
     page.wait_for_timeout(5000)
-    page.locator("text=Check In").click()
-    print("✅ تم!")
+    
+    # طباعة كل الأزرار الموجودة في الصفحة
+    buttons = page.locator("button").all()
+    for btn in buttons:
+        print(f"زرار: {btn.inner_text()}")
+    
+    links = page.locator("a").all()
+    for link in links:
+        print(f"لينك: {link.inner_text()}")
+    
     browser.close()
