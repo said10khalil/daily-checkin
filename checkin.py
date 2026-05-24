@@ -13,13 +13,8 @@ with sync_playwright() as p:
     
     page.wait_for_timeout(5000)
     
-    # طباعة كل الأزرار الموجودة في الصفحة
-    buttons = page.locator("button").all()
-    for btn in buttons:
-        print(f"زرار: {btn.inner_text()}")
-    
-    links = page.locator("a").all()
-    for link in links:
-        print(f"لينك: {link.inner_text()}")
+    # اضغط CLOCK IN
+    page.click("text=CLOCK IN")
+    print("✅ تم Clock In!")
     
     browser.close()
